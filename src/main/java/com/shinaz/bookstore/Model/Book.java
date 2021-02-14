@@ -18,7 +18,6 @@ import javax.validation.constraints.NotNull;
 public class Book {
     /**
      * Unique Book Number given by company.
-     * Eg: ISBN number
      */
     @Id
     private Long bookId;
