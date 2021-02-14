@@ -67,8 +67,8 @@ public class BookControllerTest {
         Author author= new Author(0,"author Name");
         Book book=new Book(0L,"test title",author, Category.ACTION,0,5,2);
         ResponseEntity<Book> responseEntity=ResponseEntity.status(HttpStatus.OK).body(book);
-        when(mockBookService.getBookById(anyInt())).thenReturn(responseEntity);
-        mockMvc.perform(get("/api/todolist?id=5"))
+        when(mockBookService.getBookById(anyLong())).thenReturn(responseEntity);
+        mockMvc.perform(get("/api/book?id=0L"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$.bookId").value(0L))
@@ -110,7 +110,7 @@ public class BookControllerTest {
     @Test
     public void deleteBookTest() throws Exception {
         ResponseEntity<String> responseEntity=ResponseEntity.status(HttpStatus.NO_CONTENT).body("valid book index required for updating ");
-        when(mockBookService.deleteBook(anyInt())).thenReturn(responseEntity);
+        when(mockBookService.deleteBook(anyLong())).thenReturn(responseEntity);
         MvcResult response =mockMvc.perform(delete("/api/book?id=5"))
                 .andReturn();
         assertEquals(HttpStatus.NO_CONTENT.value(), response.getResponse().getStatus());
