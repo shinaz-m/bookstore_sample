@@ -25,7 +25,7 @@ public class BookController {
      * HTTP GET
      */
     @GetMapping(path = "/api/book")
-    public ResponseEntity<Book> getTodoById(@RequestParam(value = "id") int id){
+    public ResponseEntity<Book> getTodoById(@RequestParam(value = "id") Long id){
         return bookService.getBookById(id);
     }
 
@@ -57,7 +57,7 @@ public class BookController {
      * HTTP DELETE
      */
     @DeleteMapping(path = "/api/book")
-    public ResponseEntity<String> deleteBook(@RequestParam(value = "id") int id) {
+    public ResponseEntity<String> deleteBook(@RequestParam(value = "id") Long id) {
         return bookService.deleteBook(id);
     }
 }

@@ -1,10 +1,13 @@
 package com.shinaz.bookstore.service;
 
 import com.shinaz.bookstore.Model.Book;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Log4j2
+@Service
 public class BookService {
 
     /**
@@ -18,7 +21,7 @@ public class BookService {
     /**
      * HTTP GET to get book by id
      */
-    public ResponseEntity<Book> getBookById(int index) {
+    public ResponseEntity<Book> getBookById(Long index) {
         return null;
     }
 
@@ -40,7 +43,7 @@ public class BookService {
     /**
      * HTTP DELETE
      */
-    public ResponseEntity<String> deleteBook(int index) {
+    public ResponseEntity<String> deleteBook(Long index) {
         return null;
     }
 }
