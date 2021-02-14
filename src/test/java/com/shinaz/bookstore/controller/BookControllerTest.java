@@ -110,7 +110,7 @@ public class BookControllerTest {
     @Test
     public void deleteBookTest() throws Exception {
         ResponseEntity<String> responseEntity=ResponseEntity.status(HttpStatus.NO_CONTENT).body("valid book index required for updating ");
-        when(mockBookService.deleteTodoItem(anyInt())).thenReturn(responseEntity);
+        when(mockBookService.deleteBook(anyInt())).thenReturn(responseEntity);
         MvcResult response =mockMvc.perform(delete("/api/book?id=5"))
                 .andReturn();
         assertEquals(HttpStatus.NO_CONTENT.value(), response.getResponse().getStatus());

@@ -40,7 +40,7 @@ public class BookService {
     /**
      * HTTP DELETE
      */
-    public ResponseEntity<String> deleteTodoItem(int index) {
+    public ResponseEntity<String> deleteBook(int index) {
         return null;
     }
 }
