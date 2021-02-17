@@ -1,6 +1,5 @@
 package com.shinaz.bookstore.model;
 
-import com.shinaz.bookstore.Model.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

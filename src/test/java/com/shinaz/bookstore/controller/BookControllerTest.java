@@ -2,9 +2,10 @@ package com.shinaz.bookstore.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.shinaz.bookstore.Model.Author;
-import com.shinaz.bookstore.Model.Book;
-import com.shinaz.bookstore.Model.Category;
+import com.shinaz.bookstore.dto.BookReqDto;
+import com.shinaz.bookstore.model.Author;
+import com.shinaz.bookstore.model.Book;
+import com.shinaz.bookstore.model.Category;
 import com.shinaz.bookstore.service.BookService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -52,9 +54,9 @@ public class BookControllerTest {
     public void addNewBookTest() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         Author author= new Author(0,"author Name");
-        Book book=new Book(0l,"title",author, Category.ACTION,0,5,2);
+        Book book=new Book(0l,"title", (Set<Author>) author, Category.ACTION,0,5,2);
 
-        when(mockBookService.addNewBook(any(Book.class))).thenReturn(ResponseEntity.status(HttpStatus.CREATED).body("Entity created"));
+        when(mockBookService.addNewBook(any(BookReqDto.class))).thenReturn(ResponseEntity.status(HttpStatus.CREATED).body("Entity created"));
         MvcResult response =mockMvc.perform(post("/api/book")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(book)))
@@ -65,7 +67,7 @@ public class BookControllerTest {
     @Test
     public void getBookByIdTest() throws Exception {
         Author author= new Author(0,"author Name");
-        Book book=new Book(0L,"test title",author, Category.ACTION,0,5,2);
+        Book book=new Book(0L,"test title", (Set<Author>) author, Category.ACTION,0,5,2);
         ResponseEntity<Book> responseEntity=ResponseEntity.status(HttpStatus.OK).body(book);
         when(mockBookService.getBookById(anyLong())).thenReturn(responseEntity);
         mockMvc.perform(get("/api/book?id=0L"))
@@ -111,7 +113,7 @@ public class BookControllerTest {
     public void deleteBookTest() throws Exception {
         ResponseEntity<String> responseEntity=ResponseEntity.status(HttpStatus.NO_CONTENT).body("valid book index required for updating ");
         when(mockBookService.deleteBook(anyLong())).thenReturn(responseEntity);
-        MvcResult response =mockMvc.perform(delete("/api/book?id=5"))
+        MvcResult response =mockMvc.perform(delete("/api/book?id=5L"))
                 .andReturn();
         assertEquals(HttpStatus.NO_CONTENT.value(), response.getResponse().getStatus());
     }
