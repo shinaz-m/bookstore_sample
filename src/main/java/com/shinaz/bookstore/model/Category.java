@@ -1,10 +1,10 @@
-package com.shinaz.bookstore.Model;
+package com.shinaz.bookstore.model;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public enum Category {
-    LITERATURE(0),
+    BUSINESS(0),
     NONFICTION(1),
     ACTION(2),
     THRILLER(3),

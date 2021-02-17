@@ -1,10 +1,12 @@
-package com.shinaz.bookstore.Model;
+package com.shinaz.bookstore.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Representation of Book Table
@@ -34,8 +36,8 @@ public class Book {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "book_author",
             joinColumns = {@JoinColumn(name = "book_id")},
-            inverseJoinColumns = {@JoinColumn(name = "author`_id")})
-    private Author author;
+            inverseJoinColumns = {@JoinColumn(name = "author_id")})
+    private Set<Author> author = new HashSet<>();
 
     /**
      * category of the book

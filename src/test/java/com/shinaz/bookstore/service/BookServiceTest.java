@@ -1,24 +1,20 @@
 package com.shinaz.bookstore.service;
 
-import com.shinaz.bookstore.Model.Author;
-import com.shinaz.bookstore.Model.Book;
-import com.shinaz.bookstore.Model.Category;
+import com.shinaz.bookstore.model.Author;
+import com.shinaz.bookstore.model.Book;
+import com.shinaz.bookstore.model.Category;
 import com.shinaz.bookstore.repository.BookRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -40,7 +36,7 @@ public class BookServiceTest {
     @Test
     public void addNewBookTest(){
         Author author= new Author(0,"author Name");
-        Book book=new Book(0l,"title",author, Category.ACTION,0,5,2);
+        Book book=new Book(0l,"title", (Set<Author>) author, Category.ACTION,0,5,2);
         when(mockBookRepository.save(any(Book.class))).thenReturn(book);
         ResponseEntity<String> responseEntity=ResponseEntity.status(CREATED).body("Entity created");
 
