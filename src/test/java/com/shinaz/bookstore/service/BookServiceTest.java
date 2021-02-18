@@ -8,6 +8,7 @@ import com.shinaz.bookstore.model.Author;
 import com.shinaz.bookstore.model.Book;
 import com.shinaz.bookstore.model.Category;
 import com.shinaz.bookstore.repository.BookRepository;
+import com.shinaz.bookstore.service.serviceImpl.BookServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +46,7 @@ public class BookServiceTest {
 
 
     @InjectMocks
-    private BookService mockBookService;
+    private BookServiceImpl mockBookService;
 
     @Before
     public void setUp() {
