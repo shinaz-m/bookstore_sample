@@ -1,6 +1,7 @@
 package com.shinaz.bookstore.controller;
 
 import com.shinaz.bookstore.dto.BookReqDto;
+import com.shinaz.bookstore.dto.BookResDto;
 import com.shinaz.bookstore.model.Book;
 import com.shinaz.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class BookController {
      * HTTP GET
      */
     @GetMapping(path = "/book")
-    public ResponseEntity<Book> getTodoById(@RequestParam(value = "id") Long id){
+    public ResponseEntity<BookResDto> getTodoById(@RequestParam(value = "id") Long id){
         return bookService.getBookById(id);
     }
 
@@ -34,7 +35,7 @@ public class BookController {
      * HTTP GET ALL
      */
     @GetMapping(path = "/allBooks")
-    public ResponseEntity<List<Book>> getAllTodolist(){
+    public ResponseEntity<List<BookResDto>> getAllTodolist(){
         return bookService.getAllBooks();
     }
 
@@ -50,8 +51,8 @@ public class BookController {
      * HTTP PUT UPDATE
      */
     @PutMapping(path = "/book")
-    public ResponseEntity<String> updateBook(@Valid @RequestBody Book book) {
-        return bookService.updateBook(book);
+    public ResponseEntity<String> updateBook(@Valid @RequestBody BookReqDto bookReqDto) {
+        return bookService.updateBook(bookReqDto);
     }
 
     /**

@@ -33,11 +33,11 @@ public class Book {
     /**
      * author of the book
      */
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "book_author",
             joinColumns = {@JoinColumn(name = "book_id")},
             inverseJoinColumns = {@JoinColumn(name = "author_id")})
-    private Set<Author> author = new HashSet<>();
+    private Set<Author> authors = new HashSet<>();
 
     /**
      * category of the book
