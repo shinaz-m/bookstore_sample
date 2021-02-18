@@ -12,7 +12,7 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookReqDto {
+public class BookResDto {
     private Long bookId;
     private String title;
     private Set<AuthorDto> authors;
@@ -20,5 +20,5 @@ public class BookReqDto {
     private Category category;
     private float price;
     private int totalCount;
-
+    private int sold;
 }
