@@ -9,6 +9,6 @@ import javax.persistence.Entity;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthorReqDto {
+public class AuthorDto {
     private String authorName;
 }
