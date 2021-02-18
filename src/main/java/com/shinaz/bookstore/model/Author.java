@@ -1,6 +1,5 @@
-package com.shinaz.bookstore.Model;
+package com.shinaz.bookstore.model;
 
-import io.micrometer.core.instrument.util.JsonUtils;
 import lombok.*;
 
 import javax.persistence.Entity;

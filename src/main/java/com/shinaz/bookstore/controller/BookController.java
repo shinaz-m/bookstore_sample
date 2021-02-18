@@ -1,6 +1,7 @@
 package com.shinaz.bookstore.controller;
 
-import com.shinaz.bookstore.Model.Book;
+import com.shinaz.bookstore.dto.BookReqDto;
+import com.shinaz.bookstore.model.Book;
 import com.shinaz.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-
+@RequestMapping(path = "/api")
 @RestController
 public class BookController {
 
@@ -24,7 +25,7 @@ public class BookController {
     /**
      * HTTP GET
      */
-    @GetMapping(path = "/api/book")
+    @GetMapping(path = "/book")
     public ResponseEntity<Book> getTodoById(@RequestParam(value = "id") Long id){
         return bookService.getBookById(id);
     }
@@ -32,7 +33,7 @@ public class BookController {
     /**
      * HTTP GET ALL
      */
-    @GetMapping(path = "/api/allBooks")
+    @GetMapping(path = "/allBooks")
     public ResponseEntity<List<Book>> getAllTodolist(){
         return bookService.getAllBooks();
     }
@@ -40,15 +41,15 @@ public class BookController {
     /**
      * HTTP POST NEW ONE
      */
-    @PostMapping(path = "/api/book")
-    public ResponseEntity<String> addNewBook(@Valid @RequestBody Book book){
-        return bookService.addNewBook(book);
+    @PostMapping(path = "/book")
+    public ResponseEntity<String> addNewBook(@Valid @RequestBody BookReqDto bookReqDto){
+        return bookService.addNewBook(bookReqDto);
     }
 
     /**
      * HTTP PUT UPDATE
      */
-    @PutMapping(path = "/api/book")
+    @PutMapping(path = "/book")
     public ResponseEntity<String> updateBook(@Valid @RequestBody Book book) {
         return bookService.updateBook(book);
     }
@@ -56,7 +57,7 @@ public class BookController {
     /**
      * HTTP DELETE
      */
-    @DeleteMapping(path = "/api/book")
+    @DeleteMapping(path = "/book")
     public ResponseEntity<String> deleteBook(@RequestParam(value = "id") Long id) {
         return bookService.deleteBook(id);
     }
