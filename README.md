@@ -32,7 +32,7 @@ BookStore app uses PostgreSQL as the relational database. Jpa/Hibernate is used 
 <li>This project uses project Lombok. So, if you do not have Lombok plugins inserted into your IDE, please install it into your IDD.</li>
 <li>Install PostgreSQL in your laptop if you do not have one. You can download it from here: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04 </li>
 <li>Now in your IDE, open the application.properties file, change the spring datasource url, username and password. Right now the spring datasource url=”jdbc:postgresql://localhost:5432/bookstore” . If not please put on your datasource url and put on your database username and password in these fields.</li>
-<li>Now you can run your application. The table “book” will be automatically created in “bookstore”. By default, it runs in port:9999. You can open up the swagger ui from  following url: http://localhost:8000/swagger-ui.html .</li>
+<li>Now you can run your application. The table “book” will be automatically created in “bookstore”. By default, it runs in port:8000. You can open up the swagger ui from  following url: http://localhost:8000/swagger-ui.html .</li>
 <li>Once you have set up your database, you can also run the unit tests.</li>
 <li>You can also use jacoco plugins to generate unit test reports. For that go to the IDE gradle -> verification -> double click test , gradle -> verification -> double click on jacocoTestReport and gradle -> other -> double click on sonarqube to visualise the report on sonarQube "localhost:9000"</li>
 <li>To run the application gradle ->Tasks ->application ->bootRun and you can access all the api using the localhost url "http://localhost:8000/" </li>
