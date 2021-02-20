@@ -21,4 +21,17 @@ public class BookTest {
         final String result = book.toString();
         assertEquals("Book(bookId=null, title=null, authors=[], category=null, price=0.0, totalCount=0, sold=0)", result);
     }
+
+    @Test
+    public void categoryValueOfTest(){
+        final Category result = Category.valueOf(0);
+        assertEquals(Category.BUSINESS,result);
+    }
+
+    @Test
+    public void categoryGetValueTest(){
+        Category c=Category.ACTION;
+        final int result= c.getValue();
+        assertEquals(2,result);
+    }
 }

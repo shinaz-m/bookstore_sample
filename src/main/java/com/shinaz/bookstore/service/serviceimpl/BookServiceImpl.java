@@ -1,4 +1,4 @@
-package com.shinaz.bookstore.service.serviceImpl;
+package com.shinaz.bookstore.service.serviceimpl;
 
 
 

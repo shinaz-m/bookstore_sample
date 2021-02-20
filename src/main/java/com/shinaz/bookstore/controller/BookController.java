@@ -2,7 +2,6 @@ package com.shinaz.bookstore.controller;
 
 import com.shinaz.bookstore.dto.BookReqDto;
 import com.shinaz.bookstore.dto.BookResDto;
-import com.shinaz.bookstore.model.Book;
 import com.shinaz.bookstore.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-@CrossOrigin(allowCredentials = "true", allowedHeaders = "*")
+
 @Tag(name = "Book controller", description = "This book controller class deals with basic CRUD operation on Book.Class with Author details")
 @RequestMapping(path = "/api")
 @RestController
