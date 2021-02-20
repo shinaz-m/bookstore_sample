@@ -2,7 +2,6 @@ package com.shinaz.bookstore.dto;
 
 import lombok.*;
 
-import javax.persistence.Entity;
 
 @Getter
 @Setter

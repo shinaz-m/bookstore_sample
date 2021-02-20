@@ -1,6 +1,5 @@
 package com.shinaz.bookstore.exception;
 
-import com.shinaz.bookstore.exceptions.BadRequestException;
 import com.shinaz.bookstore.exceptions.BookNotFoundException;
 import org.junit.Before;
 import org.junit.Test;

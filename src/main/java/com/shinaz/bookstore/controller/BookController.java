@@ -2,7 +2,6 @@ package com.shinaz.bookstore.controller;
 
 import com.shinaz.bookstore.dto.BookReqDto;
 import com.shinaz.bookstore.dto.BookResDto;
-import com.shinaz.bookstore.model.Book;
 import com.shinaz.bookstore.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

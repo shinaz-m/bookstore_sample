@@ -17,7 +17,8 @@ public class AuthorDtoTest {
 
     @Test
     public void authorTest(){
+        authorDto.setAuthorName("author");
         final String result = authorDto.toString();
-        assertEquals("AuthorDto(authorName=null)", result);
+        assertEquals("AuthorDto(authorName=author)", result);
     }
 }
