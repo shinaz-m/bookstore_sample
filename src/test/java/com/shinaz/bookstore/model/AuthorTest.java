@@ -17,7 +17,8 @@ public class AuthorTest {
 
     @Test
     public void authorTest(){
+        author.setAuthorName("author");
         final String result = author.toString();
-        assertEquals("Author(authorId=0, authorName=null)", result);
+        assertEquals("Author(authorId=0, authorName=author)", result);
     }
 }

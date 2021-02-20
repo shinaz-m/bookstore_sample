@@ -4,11 +4,12 @@ import com.shinaz.bookstore.dto.AuthorDto;
 import com.shinaz.bookstore.dto.BookReqDto;
 import com.shinaz.bookstore.dto.BookResDto;
 import com.shinaz.bookstore.exceptions.BookNotFoundException;
+import com.shinaz.bookstore.exceptions.DuplicateResourceException;
 import com.shinaz.bookstore.model.Author;
 import com.shinaz.bookstore.model.Book;
 import com.shinaz.bookstore.model.Category;
 import com.shinaz.bookstore.repository.BookRepository;
-import com.shinaz.bookstore.service.serviceImpl.BookServiceImpl;
+import com.shinaz.bookstore.service.serviceimpl.BookServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
@@ -57,14 +58,17 @@ public class BookServiceTest {
     @Test
     public void addNewBookTest(){
         Set<Author> authorSet=new HashSet<>();
-        Author author= new Author(0,"author Name");
-        authorSet.add(author);
-        Book book=new Book(5l,"title",  authorSet, Category.ACTION,9,5,2);
-        when(mockBookRepository.save(any(Book.class))).thenReturn(book);
-        ResponseEntity<String> responseEntity=ResponseEntity.status(CREATED).body("Entity created");
+        authorSet.add(new Author(0,"author Name"));
         Set<AuthorDto> authorDtoSet=new HashSet<>();
         authorDtoSet.add(new AuthorDto("author Name"));
+        Book book=new Book(5l,"title",  authorSet, Category.ACTION,9,5,2);
+        Book existingBook=new Book(4l,"title",  authorSet, Category.ACTION,9,5,2);
+        when(mockBookRepository.findById(4l)).thenReturn(Optional.of(existingBook));
+        when(mockBookRepository.save(any(Book.class))).thenReturn(book);
         when(modelMapper.map(any(BookReqDto.class), eq(Book.class))).thenReturn(book);
+
+        assertThrows(DuplicateResourceException.class, () -> mockBookService.addNewBook(new BookReqDto(4l,"title", authorDtoSet,Category.ACTION,9,5)));
+        ResponseEntity<String> responseEntity=ResponseEntity.status(CREATED).body("Entity created");
         final ResponseEntity<String> result = mockBookService.addNewBook(new BookReqDto(5l,"title", authorDtoSet,Category.ACTION,9,5));
         assertEquals(responseEntity, result);
 
@@ -75,15 +79,15 @@ public class BookServiceTest {
         Set<Author> authorSet=new HashSet<>();
         Author author= new Author(1,"author Name");
         authorSet.add(author);
-        Optional<Book> book= Optional.of(new Book(5L, "title", authorSet, Category.ACTION, 0, 5, 2));
-        when(mockBookRepository.findById(anyLong())).thenReturn(book);
-        when(mockBookRepository.findById(0L)).thenThrow( new BookNotFoundException( String.format("Invalid book id 0L")));
-        Exception exception = assertThrows(BookNotFoundException.class, () ->
-                mockBookService.getBookById(0L));
         Set<AuthorDto> authorDtoSet=new HashSet<>();
         authorDtoSet.add(new AuthorDto("author Name"));
+        Optional<Book> book= Optional.of(new Book(5L, "title", authorSet, Category.ACTION, 0, 5, 2));
         BookResDto bookResDto=new BookResDto(5l,"title", authorDtoSet,Category.ACTION,9,5,2);
+
+        when(mockBookRepository.findById(anyLong())).thenReturn(book);
+        when(mockBookRepository.findById(0L)).thenThrow( new BookNotFoundException( String.format("Invalid book id 0L")));
         when(modelMapper.map(any(Book.class), eq(BookResDto.class))).thenReturn(bookResDto);
+        assertThrows(BookNotFoundException.class, () -> mockBookService.getBookById(0L));
         ResponseEntity<BookResDto> responseEntity=ResponseEntity.status(HttpStatus.OK).body(bookResDto);
         ResponseStatusException response= new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Invalid book id 0L"));
         final ResponseEntity<BookResDto> result = mockBookService.getBookById(5L);
@@ -92,9 +96,20 @@ public class BookServiceTest {
 
     @Test
     public void getAllBookTest(){
+        List<BookResDto> bookResDtoList=new ArrayList<>();
+        Set<AuthorDto> authorDtoSet=new HashSet<>();
+        authorDtoSet.add(new AuthorDto("author Name"));
+        BookResDto bookResDto=new BookResDto(5l,"title", authorDtoSet,Category.ACTION,9,5,2);
+        bookResDtoList.add(bookResDto);
         List<Book> bookList=new ArrayList<>();
+        Set<Author> authorSet=new HashSet<>();
+        Author author= new Author(1,"author Name");
+        authorSet.add(author);
+        bookList.add(new Book(5L, "title", authorSet, Category.ACTION, 0, 5, 2));
+
+        when(modelMapper.map(any(Book.class), eq(BookResDto.class))).thenReturn(bookResDto);
         when(mockBookRepository.findAll()).thenReturn(bookList);
-        ResponseEntity<List<Book>> responseEntity=ResponseEntity.status(HttpStatus.OK).body(bookList);
+        ResponseEntity<List<BookResDto>> responseEntity=ResponseEntity.status(HttpStatus.OK).body(bookResDtoList);
 
         final ResponseEntity<List<BookResDto>> result = mockBookService.getAllBooks();
         assertEquals(responseEntity, result);
